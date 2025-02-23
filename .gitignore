@@ -3,12 +3,17 @@
 
 # Builds
 /build/
-/dist/
 /out/
 /.next/
 /.nuxt/
 /.svelte-kit/
-
+/src
+/public
+/eslint.config.js
+/index.html
+/package-lock.json
+/package.json/tailwind.config.js
+/vite.config.js
 # Archivos de entorno
 .env
 .env.local

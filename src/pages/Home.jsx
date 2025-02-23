@@ -1,8 +1,13 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import profileImg from "../assets/profile.jpeg";
+import { LanguageContext } from "../services/LanguageContext";
+import translations from "../assets/translations.json";
+import React, { useContext } from "react";
 
 function Home() {
+  const { language, toggleLanguage } = useContext(LanguageContext);
+  const t = translations[language]; // Textos en el idioma actual
   return (
     <section style={{ paddingBottom: '500px' }} className="flex flex-col-reverse md:flex-row items-center justify-center min-h-screen px-4 md:px-8">
       {/* Texto de presentación */}
@@ -12,15 +17,15 @@ function Home() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 dark:text-black">
-          ¡Hola! Soy <span className="text-blue-600">Franco Recalde</span>
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-700 dark:text-gray-300">
+          {t.hola}<span className="text-cyan-500">Franco Recalde</span>
         </h1>
         <p className="mt-4 text-base sm:text-lg text-gray-700 dark:text-gray-300">
-          Estudiante de Ingeniería en Sistemas apasionado por el continuo aprendizaje
+          {t.apasionado}
         </p>
         <Link to="/about">
           <button className="mt-6 px-6 py-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition">
-            Más sobre mí
+            {t.masSobreMi}
           </button>
         </Link>
       </motion.div>

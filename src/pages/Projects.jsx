@@ -2,27 +2,30 @@ import { motion } from "framer-motion";
 import spring from "../assets/spring.png";
 import react from "../assets/REACT.png";
 import esp from "../assets/ESP.jpeg";
+import { LanguageContext } from "../services/LanguageContext"; // Importa el contexto de idioma
+import translations from "../assets/translations.json"; // Importa las traducciones
+import React, { useContext } from "react";
 
 function Projects() {
+  const { language } = useContext(LanguageContext); // Usa el contexto de idioma
+  const t = translations[language]; // Textos en el idioma actual
+
   const projects = [
     {
-      title: "Proyecto Spring Boot",
-      description:
-        "Desarrollo de una API RESTful para la gestión de recursos utilizando Spring Boot. Incluye autenticación JWT y conexión a base de datos local.",
+      title: t.proyectoSpringBoot, // Título traducido
+      description: t.descripcionSpringBoot, // Descripción traducida
       image: spring,
       repo: "https://github.com/FrancoRecalde/ProjectsFrancoRecalde/tree/main/Project%20SpringBoot",
     },
     {
-      title: "Aplicación Full Stack con React",
-      description:
-        "Aplicación web full stack con React en el frontend y Node.js en el backend. Incluye base de datos local.",
+      title: t.aplicacionFullStack, // Título traducido
+      description: t.descripcionFullStack, // Descripción traducida
       image: react,
       repo: "https://github.com/FrancoRecalde/ProjectsFrancoRecalde/tree/main/Project%20REACT",
     },
     {
-      title: "Sistema con ESP32 y Sensor PIR",
-      description:
-        "Implementación de un sistema de detección de movimiento usando un microprocesador ESP32 y un sensor PIR. Relizada con MicroPython. Las notificaciones son enviadas via whatsapp",
+      title: t.sistemaESP32, // Título traducido
+      description: t.descripcionESP32, // Descripción traducida
       image: esp,
       repo: "https://github.com/FrancoRecalde/ProjectsFrancoRecalde/tree/main/Project%20PIR%20hc-sr50%20ESP%2032",
     },
@@ -38,7 +41,7 @@ function Projects() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          Proyectos
+          {t.proyectos} {/* Título traducido */}
         </motion.h2>
 
         {/* Lista de proyectos */}
@@ -46,7 +49,7 @@ function Projects() {
           {projects.map((project, index) => (
             <motion.div
               key={index}
-              className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden flex flex-col h-full" // Agrega flex, flex-col y h-full
+              className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden flex flex-col h-full"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: index * 0.2 }}
@@ -59,23 +62,23 @@ function Projects() {
               />
 
               {/* Contenido del proyecto */}
-              <div className="p-6 flex flex-col flex-grow"> {/* Agrega flex-grow */}
+              <div className="p-6 flex flex-col flex-grow">
                 <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-                  {project.title}
+                  {project.title} {/* Título traducido */}
                 </h3>
                 <p className="text-gray-700 dark:text-gray-300 mb-4">
-                  {project.description}
+                  {project.description} {/* Descripción traducida */}
                 </p>
 
                 {/* Botón para ver el repositorio */}
-                <div className="mt-auto"> {/* mt-auto empuja el botón hacia abajo */}
+                <div className="mt-auto">
                   <a
                     href={project.repo}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition w-full text-center"
                   >
-                    Ver Repositorio
+                    {t.verRepositorio} {/* Texto del botón traducido */}
                   </a>
                 </div>
               </div>
@@ -87,4 +90,4 @@ function Projects() {
   );
 }
 
-export default Projects;
+export default Projects;  

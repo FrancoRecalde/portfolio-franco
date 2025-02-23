@@ -1,7 +1,13 @@
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaEnvelope, FaWhatsapp } from "react-icons/fa"; // Agrega FaWhatsapp
+import { LanguageContext } from "../services/LanguageContext"; // Importa el contexto de idioma
+import translations from "../assets/translations.json"; // Importa las traducciones
+import React, { useContext } from "react";
 
 function Footer() {
+  const { language } = useContext(LanguageContext); // Usa el contexto de idioma
+  const t = translations[language]; // Textos en el idioma actual
+
   return (
     <footer className="bg-gray-900 text-white py-8">
       <div className="container mx-auto px-4">
@@ -15,7 +21,7 @@ function Footer() {
           {/* Derechos de autor */}
           <div className="text-center md:text-left mb-4 md:mb-0">
             <p className="text-sm">
-              © 2025 Franco Recalde. Todos los derechos reservados.
+              {t.derechosReservados} {/* Texto traducido */}
             </p>
           </div>
 

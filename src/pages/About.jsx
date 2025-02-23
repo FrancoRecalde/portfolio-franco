@@ -1,19 +1,29 @@
 import { motion } from "framer-motion";
 import profileImg from "../assets/profile.jpeg";
-import cvPdf from "../assets/CV_Franco_Recalde.pdf"; // Importa el archivo PDF
+import cvPdfES from "../assets/CV_FRANCO_RECALDE_ACT_ESPANOL.PDF"; // CV en español
+import cvPdfEN from "../assets/CV_FRANCO_RECALDE_ACT_ENGLISH.PDF"; // CV en inglés
+import { LanguageContext } from "../services/LanguageContext";
+import translations from "../assets/translations.json";
+import React, { useContext } from "react";
+
 function About() {
+  const { language } = useContext(LanguageContext); // Usa el contexto de idioma
+  const t = translations[language]; // Textos en el idioma actual
+
+  // Selecciona el archivo de CV según el idioma
+  const cvPdf = language === "es" ? cvPdfES : cvPdfEN;
+
   return (
     <section className="bg-white dark:bg-gray-800 py-12 ">
       <div className="container mx-auto px-4">
         {/* Título */}
         <motion.h2
-          style={{paddingRight:"187px"}}
           className="text-4xl md:text-5xl font-bold text-center text-gray-900 dark:text-white mb-8"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          Sobre mí
+          {t.sobreMi}
         </motion.h2>
 
         {/* Contenido */}
@@ -39,49 +49,45 @@ function About() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <p className="text-lg text-gray-700 dark:text-gray-300 mb-6">
-              Soy Franco Recalde, un apasionado estudiante de 20 años cursando el cuarto año de
-              Ingeniería en Sistemas en la UTN FRC. Mi fascinación por la tecnología me impulsa a
-              mantenerme siempre actualizado con las últimas tendencias y herramientas del sector.
-              Disfruto enfrentándome a nuevos desafíos y ampliando mis conocimientos. Mi objetivo crecer como profesional y contribuir
-              al mundo de la tecnología con proyectos que generen un impacto positivo.
+            <p className="text-lg text-gray-700 dark:text-gray-300 mb-6 text-justify">
+              {t.descripcionPersonal}
             </p>
 
             {/* Habilidades (iconos o texto) */}
             <div className="flex flex-wrap justify-center md:justify-start gap-4 mb-6">
               <span className="bg-blue-100 text-blue-800 text-sm font-medium px-4 py-2 rounded-full">
-                React
+                {t.habilidades.react}
               </span>
               <span className="bg-green-100 text-green-800 text-sm font-medium px-4 py-2 rounded-full">
-                Spring Boot
+                {t.habilidades.springBoot}
               </span>
               <span className="bg-purple-100 text-purple-800 text-sm font-medium px-4 py-2 rounded-full">
-                Microcontroladores
+                {t.habilidades.microcontroladores}
               </span>
               <span className="bg-yellow-100 text-yellow-800 text-sm font-medium px-4 py-2 rounded-full">
-                Unity
+                {t.habilidades.unity}
               </span>
               <span className="bg-yellow-100 text-yellow-800 text-sm font-medium px-4 py-2 rounded-full">
-                Python
+                {t.habilidades.python}
               </span>
               <span className="bg-yellow-100 text-yellow-800 text-sm font-medium px-4 py-2 rounded-full">
-                Java
+                {t.habilidades.java}
               </span>
               <span className="bg-yellow-100 text-yellow-800 text-sm font-medium px-4 py-2 rounded-full">
-                JavaScript
+                {t.habilidades.javascript}
               </span>
               <span className="bg-yellow-100 text-yellow-800 text-sm font-medium px-4 py-2 rounded-full">
-                C#
+                {t.habilidades.csharp}
               </span>
             </div>
 
             {/* Botón para descargar CV */}
             <a
-              href={cvPdf} // Cambia esto por la ruta a tu CV
-              download="CV_Franco_Recalde.pdf"
+              href={cvPdf} // Cambia dinámicamente según el idioma
+              download={language === "es" ? "CV_Franco_Recalde_ES.pdf" : "CV_Franco_Recalde_EN.pdf"}
               className="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition"
             >
-              Descargar CV
+              {t.descargarCV}
             </a>
           </motion.div>
         </div>
